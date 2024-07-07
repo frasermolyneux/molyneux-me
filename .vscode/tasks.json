@@ -6,7 +6,7 @@
         {
             "label": "Serve",
             "type": "shell",
-            "command": "jekyll serve --livereload",
+            "command": "jekyll serve --source src --livereload",
             "group": {
                 "kind": "test",
                 "isDefault": true
@@ -16,7 +16,7 @@
         {
             "label": "Build",
             "type": "shell",
-            "command": "jekyll build",
+            "command": "jekyll build --source src ",
             "group": {
                 "kind": "build",
                 "isDefault": true
