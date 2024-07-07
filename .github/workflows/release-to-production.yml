@@ -16,7 +16,7 @@ concurrency: # This is required to prevent multiple runs of the same workflow fr
   group: ${{ github.workflow }}
 
 jobs:
-    steps:
+  steps:
     - uses: actions/checkout@v4
 
     - uses: frasermolyneux/actions/terraform-plan-and-apply@main
