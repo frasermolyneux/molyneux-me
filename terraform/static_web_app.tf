@@ -5,8 +5,4 @@ resource "azurerm_static_web_app" "app" {
 
   sku_tier = "Free"
   sku_size = "Free"
-
-  identity {
-    type = "SystemAssigned"
-  }
 }
