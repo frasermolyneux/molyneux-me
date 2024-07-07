@@ -84,7 +84,7 @@ jobs:
         bundler-cache: true
 
     - name: Jekyll build
-      run: bundle exec jekyll build --path src
+      run: bundle exec jekyll build
       env:
         JEKYLL_ENV: production
 
