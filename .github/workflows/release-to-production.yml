@@ -16,14 +16,21 @@ concurrency: # This is required to prevent multiple runs of the same workflow fr
   group: ${{ github.workflow }}
 
 jobs:
-  steps:
-  - uses: actions/checkout@v4
+  terraform-plan-and-apply-dev:
+    environment: Development
+    runs-on: ubuntu-latest
 
-  - uses: frasermolyneux/actions/terraform-plan-and-apply@main
-    with:
-      terraform-folder: "terraform"
-      terraform-var-file: "tfvars/dev.tfvars"
-      terraform-backend-file: "backends/dev.backend.hcl"
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    concurrency: # This is required to prevent multiple GitHub Actions invocations against stateful resources. e.g. Terraform state file / Database / Deployed Apps
+      group: ${{ github.repository }}-dev
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: frasermolyneux/actions/terraform-plan-and-apply@main
+      with:
+        terraform-folder: "terraform"
+        terraform-var-file: "tfvars/dev.tfvars"
+        terraform-backend-file: "backends/dev.backend.hcl"
+        AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
