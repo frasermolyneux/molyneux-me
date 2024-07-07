@@ -79,8 +79,8 @@ jobs:
 
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
+      with:
+        bundler-cache: true
 
     - name: Jekyll build
       run: bundle exec jekyll build
@@ -90,8 +90,8 @@ jobs:
     - id: deploy-static-web-app
       uses: Azure/static-web-apps-deploy@v1
       with:
-          azure_static_web_apps_api_token: ${{ env.static_web_app_api_key }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: "upload"
-          output_location: "_site" 
-          skip_app_build: true
+        azure_static_web_apps_api_token: ${{ env.static_web_app_api_key }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        action: "upload"
+        output_location: "_site" 
+        skip_app_build: true
