@@ -53,3 +53,11 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+exclude: 
+  - .devcontainer/
+  - .github/
+  - .vscode/
+  - terraform/
+  - .gitignore
+  - README.md
