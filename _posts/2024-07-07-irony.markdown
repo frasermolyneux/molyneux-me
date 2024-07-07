@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "Irony"
+date:   2024-07-07 12:00:00 +0000
+categories: software-engineering culture
+---
+
+# Irony...
+
+I am currently migrating from Wordpress to a static website to reduce (hopefully eliminate my costs). That's this website, nothing much in here other than a mixture of travel and some tech related blog entries. 
+
+The irony is that I have just read my 'make your CV work for you' entry; how naive I was; successful perhaps. But naive.
