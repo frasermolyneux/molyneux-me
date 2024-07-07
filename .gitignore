@@ -3,3 +3,8 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+
+# Terraform
+terraform/.terraform.lock.hcl
+terraform/.terraform/*
+terraform.tfstate
