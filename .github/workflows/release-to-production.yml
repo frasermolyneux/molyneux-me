@@ -94,5 +94,5 @@ jobs:
         azure_static_web_apps_api_token: ${{ env.static_web_app_api_key }}
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         action: "upload"
-        output_location: "_site" 
+        app_location: "_site" 
         skip_app_build: true
