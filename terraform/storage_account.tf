@@ -13,7 +13,7 @@ resource "azurerm_storage_account" "app_data_storage" {
 
   blob_properties {
     change_feed_enabled           = true
-    change_feed_retention_in_days = 14
+    change_feed_retention_in_days = 28
 
     versioning_enabled = true
 
