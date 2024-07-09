@@ -11,6 +11,20 @@ resource "azurerm_storage_account" "app_data_storage" {
   enable_https_traffic_only = true
   min_tls_version           = "TLS1_2"
 
+  blob_properties {
+    restore_policy {
+      days = 14
+    }
+
+    delete_retention_policy {
+      days = 28
+    }
+
+    container_delete_retention_policy {
+      days = 28
+    }
+  }
+
   tags = var.tags
 }
 
