@@ -13,16 +13,10 @@ Due to the heat and our condition it took much longer. We had set off late 12:30
 
 The hike was mainly shaded but here are the pictures coming up out the treeline and around the hut.
 
-![hakuba-oolke-1](/images/2019-08-05/hakuba-oolke-1.jpg)
-
-![hakuba-oolke-2](/images/2019-08-05/hakuba-oolke-2.jpg)
-
-![hakuba-oolke-3](/images/2019-08-05/hakuba-oolke-3.jpg)
-
-![hakuba-oolke-4](/images/2019-08-05/hakuba-oolke-4.jpg)
-
-![hakuba-oolke-5](/images/2019-08-05/hakuba-oolke-5.jpg)
-
-![hakuba-oolke-6](/images/2019-08-05/hakuba-oolke-6.jpg)
-
-![hakuba-oolke-7](/images/2019-08-05/hakuba-oolke-7.jpg)
+![hakuba-oolke-1](https://sa220030efa07d.blob.core.windows.net/images/2019/08/05/hakuba-oolke-1.jpg)
+![hakuba-oolke-2](https://sa220030efa07d.blob.core.windows.net/images/2019/08/05/hakuba-oolke-2.jpg)
+![hakuba-oolke-3](https://sa220030efa07d.blob.core.windows.net/images/2019/08/05/hakuba-oolke-3.jpg)
+![hakuba-oolke-4](https://sa220030efa07d.blob.core.windows.net/images/2019/08/05/hakuba-oolke-4.jpg)
+![hakuba-oolke-5](https://sa220030efa07d.blob.core.windows.net/images/2019/08/05/hakuba-oolke-5.jpg)
+![hakuba-oolke-6](https://sa220030efa07d.blob.core.windows.net/images/2019/08/05/hakuba-oolke-6.jpg)
+![hakuba-oolke-7](https://sa220030efa07d.blob.core.windows.net/images/2019/08/05/hakuba-oolke-7.jpg)

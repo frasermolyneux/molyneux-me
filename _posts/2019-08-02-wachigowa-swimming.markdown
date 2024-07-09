@@ -11,12 +11,8 @@ Stunning area and beautiful surroundings. Water is great and it is deep enough t
 
 It has changed allot in the last four years since I was here last and some rock slides have occurred.
 
-![wachigowa-1](/images/2019-08-02/wachigowa-1.jpg)
-
-![wachigowa-2](/images/2019-08-02/wachigowa-2.jpg)
-
-![wachigowa-3](/images/2019-08-02/wachigowa-3.jpg)
-
-![wachigowa-4](/images/2019-08-02/wachigowa-4.jpg)
-
-![wachigowa-5](/images/2019-08-02/wachigowa-5.jpg)
+![wachigowa-1](https://sa220030efa07d.blob.core.windows.net/images/2019/08/02/wachigowa-1.jpg)
+![wachigowa-2](https://sa220030efa07d.blob.core.windows.net/images/2019/08/02/wachigowa-2.jpg)
+![wachigowa-3](https://sa220030efa07d.blob.core.windows.net/images/2019/08/02/wachigowa-3.jpg)
+![wachigowa-4](https://sa220030efa07d.blob.core.windows.net/images/2019/08/02/wachigowa-4.jpg)
+![wachigowa-5](https://sa220030efa07d.blob.core.windows.net/images/2019/08/02/wachigowa-5.jpg)

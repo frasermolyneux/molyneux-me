@@ -11,10 +11,7 @@ I walked away feeling relaxed and all the aches and pains gone. And smelling of 
 
 I would recommend this for anyone to try, it’s a fair hike but completely worth it and an experience to remember.
 
-![renge-1](/images/2019-08-05/renge-1.jpg)
-
-![renge-2](/images/2019-08-05/renge-2.jpg)
-
-![renge-3](/images/2019-08-05/renge-3.jpg)
-
-![renge-4](/images/2019-08-05/renge-4.jpg)
+![renge-1](https://sa220030efa07d.blob.core.windows.net/images/2019/08/05/renge-1.jpg)
+![renge-2](https://sa220030efa07d.blob.core.windows.net/images/2019/08/05/renge-2.jpg)
+![renge-3](https://sa220030efa07d.blob.core.windows.net/images/2019/08/05/renge-3.jpg)
+![renge-4](https://sa220030efa07d.blob.core.windows.net/images/2019/08/05/renge-4.jpg)
