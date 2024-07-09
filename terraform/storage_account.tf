@@ -15,6 +15,8 @@ resource "azurerm_storage_account" "app_data_storage" {
     change_feed_enabled           = true
     change_feed_retention_in_days = 14
 
+    versioning_enabled = true
+
     restore_policy {
       days = 14
     }
