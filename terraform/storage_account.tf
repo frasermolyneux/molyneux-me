@@ -12,6 +12,9 @@ resource "azurerm_storage_account" "app_data_storage" {
   min_tls_version           = "TLS1_2"
 
   blob_properties {
+    change_feed_enabled           = true
+    change_feed_retention_in_days = 14
+
     restore_policy {
       days = 14
     }
