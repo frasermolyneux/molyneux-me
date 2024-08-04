@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Snake"
-date:   2019-07-29 12:00:00 +0000
+title:  "Snake!!!"
+date: 2019-07-29 07:30:12 +0000
 categories: animals japan snake travel
 ---
 
@@ -9,5 +9,6 @@ Walking back from the Onsen to the Log House I was not paying attention to the g
 
 Saw it out the corner of my eye move as I stepped in front of it and jumped into the road! Unsure what it is, will have to investigate.
 
-![snake-1](https://sa220030efa07d.blob.core.windows.net/images/2019/07/29/snake-1.jpg)
-![snake-2](https://sa220030efa07d.blob.core.windows.net/images/2019/07/29/snake-2.jpg)
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/07/img_20190729_151613.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/07/img_20190729_151618.jpg">

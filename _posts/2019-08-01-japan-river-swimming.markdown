@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Japan River Swimming"
-date:   2019-08-01 12:00:00 +0000
+date: 2019-08-01 12:59:04 +0000
 categories: japan swimming travel
 ---
 
@@ -13,12 +13,20 @@ We gave up there and went to a spot Karen had been to before next to Gozamatzu c
 
 There is a dam upstream that has waterfalls to sit under and have a massage. The pictures are from downstream as I did not take my camera up.
 
-![japan-river-swimming-1](https://sa220030efa07d.blob.core.windows.net/images/2019/08/01/japan-river-swimming-1.jpg)
-![japan-river-swimming-2](https://sa220030efa07d.blob.core.windows.net/images/2019/08/01/japan-river-swimming-2.jpg)
-![japan-river-swimming-3](https://sa220030efa07d.blob.core.windows.net/images/2019/08/01/japan-river-swimming-3.jpg)
-![japan-river-swimming-4](https://sa220030efa07d.blob.core.windows.net/images/2019/08/01/japan-river-swimming-4.jpg)
-![japan-river-swimming-5](https://sa220030efa07d.blob.core.windows.net/images/2019/08/01/japan-river-swimming-5.jpg)
-![japan-river-swimming-6](https://sa220030efa07d.blob.core.windows.net/images/2019/08/01/japan-river-swimming-6.jpg)
-![japan-river-swimming-7](https://sa220030efa07d.blob.core.windows.net/images/2019/08/01/japan-river-swimming-7.jpg)
-![japan-river-swimming-8](https://sa220030efa07d.blob.core.windows.net/images/2019/08/01/japan-river-swimming-8.jpg)
-![japan-river-swimming-9](https://sa220030efa07d.blob.core.windows.net/images/2019/08/01/japan-river-swimming-9.jpg)
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/07/img_20190801_143451.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/07/img_20190801_131314.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/07/img_20190801_160655.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/07/img_20190801_143501.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/07/img_20190801_131254.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/07/img_20190801_160208.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/07/img_20190801_160931.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/07/img_20190801_131311.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/07/img_20190801_161705.jpg">

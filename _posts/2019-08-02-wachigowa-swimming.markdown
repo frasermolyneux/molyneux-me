@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Wachigowa Swimming"
-date:   2019-08-02 12:00:00 +0000
+date: 2019-08-02 12:51:55 +0000
 categories: food japan swimming travel
 ---
 
@@ -11,8 +11,14 @@ Stunning area and beautiful surroundings. Water is great and it is deep enough t
 
 It has changed allot in the last four years since I was here last and some rock slides have occurred.
 
-![wachigowa-1](https://sa220030efa07d.blob.core.windows.net/images/2019/08/02/wachigowa-1.jpg)
-![wachigowa-2](https://sa220030efa07d.blob.core.windows.net/images/2019/08/02/wachigowa-2.jpg)
-![wachigowa-3](https://sa220030efa07d.blob.core.windows.net/images/2019/08/02/wachigowa-3.jpg)
-![wachigowa-4](https://sa220030efa07d.blob.core.windows.net/images/2019/08/02/wachigowa-4.jpg)
-![wachigowa-5](https://sa220030efa07d.blob.core.windows.net/images/2019/08/02/wachigowa-5.jpg)
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/08/img_20190802_160651.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/08/img_20190802_170634.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/08/img_20190802_161246.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/08/img_20190802_170628.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/08/img_20190802_162314.jpg">
+
+<img src="https://sa220030efa07d.blob.core.windows.net/images/2019/08/img_20190802_152900.jpg">
