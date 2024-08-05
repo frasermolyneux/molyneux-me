@@ -21,3 +21,13 @@ provider "azurerm" {
     }
   }
 }
+
+provider "azurerm" {
+  alias           = "dns"
+  subscription_id = var.dns.subscription_id
+
+  # This is a workload repository so won't have permissions to register providers
+  skip_provider_registration = true
+
+  features {}
+}
