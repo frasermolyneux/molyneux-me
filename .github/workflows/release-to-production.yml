@@ -31,9 +31,9 @@ jobs:
         terraform-folder: "terraform"
         terraform-var-file: "tfvars/dev.tfvars"
         terraform-backend-file: "backends/dev.backend.hcl"
-        AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-        AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        AZURE_CLIENT_ID: ${{ env.AZURE_CLIENT_ID }}
+        AZURE_TENANT_ID: ${{ env.AZURE_TENANT_ID }}
+        AZURE_SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
 
     - id: terraform-output
       shell: bash
@@ -41,9 +41,9 @@ jobs:
         cd terraform
         echo "static_web_app_name=$(terraform output -raw static_web_app_name)" >> $GITHUB_OUTPUT
       env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        ARM_CLIENT_ID: ${{ env.AZURE_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ env.AZURE_TENANT_ID }}
         ARM_USE_AZUREAD: true
         ARM_USE_OIDC: true
 
@@ -66,9 +66,9 @@ jobs:
     - name: "Az CLI Login"
       uses: azure/login@v2
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        client-id: ${{ env.AZURE_CLIENT_ID }}
+        subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+        tenant-id: ${{ env.AZURE_TENANT_ID }}
 
     - id: static-web-app-api-key
       uses: azure/CLI@v1
@@ -114,9 +114,9 @@ jobs:
         terraform-folder: "terraform"
         terraform-var-file: "tfvars/prd.tfvars"
         terraform-backend-file: "backends/prd.backend.hcl"
-        AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-        AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        AZURE_CLIENT_ID: ${{ env.AZURE_CLIENT_ID }}
+        AZURE_TENANT_ID: ${{ env.AZURE_TENANT_ID }}
+        AZURE_SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
 
     - id: terraform-output
       shell: bash
@@ -124,9 +124,9 @@ jobs:
         cd terraform
         echo "static_web_app_name=$(terraform output -raw static_web_app_name)" >> $GITHUB_OUTPUT
       env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        ARM_CLIENT_ID: ${{ env.AZURE_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ env.AZURE_TENANT_ID }}
         ARM_USE_AZUREAD: true
         ARM_USE_OIDC: true
 
@@ -149,9 +149,9 @@ jobs:
     - name: "Az CLI Login"
       uses: azure/login@v2
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        client-id: ${{ env.AZURE_CLIENT_ID }}
+        subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+        tenant-id: ${{ env.AZURE_TENANT_ID }}
 
     - id: static-web-app-api-key
       uses: azure/CLI@v1
