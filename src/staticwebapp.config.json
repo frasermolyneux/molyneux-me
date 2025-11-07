@@ -1,16 +1,16 @@
 {
-  "routes": [
-    {
-      "route": "/*",
-      "headers": {
-        "cache-control": "must-revalidate, max-age=6000"
-      }
+    "routes": [
+        {
+            "route": "/*",
+            "headers": {
+                "cache-control": "must-revalidate, max-age=6000"
+            }
+        }
+    ],
+    "mimeTypes": {
+        ".json": "application/json",
+        ".css": "text/css",
+        ".js": "application/javascript",
+        ".html": "text/html"
     }
-  ],
-  "mimeTypes": {
-    ".json": "application/json",
-    ".css": "text/css",
-    ".js": "application/javascript",
-    ".html": "text/html"
-  }
 }
