@@ -1,3 +1,7 @@
+variable "workload" {
+  default = "molyneux-me"
+}
+
 variable "environment" {
   default = "dev"
 }

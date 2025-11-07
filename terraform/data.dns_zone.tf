@@ -1,4 +1,4 @@
-data "azurerm_dns_zone" "molyneux-me" {
+data "azurerm_dns_zone" "primary" {
   provider = azurerm.dns
 
   name                = var.dns.domain
