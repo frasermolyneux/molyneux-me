@@ -14,7 +14,22 @@
                 "kind": "test",
                 "isDefault": true
             },
-            "isBackground": true
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "jekyll-serve",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}/src"
+                ],
+                "pattern": {
+                    "regexp": "^$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^\\s*Configuration file:",
+                    "endsPattern": "^\\s*Server running.*$"
+                }
+            }
         },
         {
             "label": "Build",

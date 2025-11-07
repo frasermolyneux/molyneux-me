@@ -1,0 +1,32 @@
+{
+    "name": "molyneux-me development",
+    "image": "mcr.microsoft.com/devcontainers/ruby:3.3",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "20"
+        },
+        "ghcr.io/devcontainers/features/terraform:1": {
+            "version": "1.11.0"
+        },
+        "ghcr.io/devcontainers/features/azure-cli:1": {}
+    },
+    "forwardPorts": [
+        4000
+    ],
+    "postCreateCommand": "gem install bundler && cd src && bundle install",
+    "remoteUser": "vscode",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            "extensions": [
+                "Shopify.ruby-lsp",
+                "GitHub.copilot",
+                "HashiCorp.terraform",
+                "ms-azuretools.vscode-azureterraform",
+                "ms-vscode.azure-account"
+            ]
+        }
+    }
+}
