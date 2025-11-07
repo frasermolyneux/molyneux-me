@@ -82,9 +82,11 @@ jobs:
       with:
         ruby-version: '3.3'
         bundler-cache: true
+        working-directory: src
 
     - name: Jekyll build
       run: bundle exec jekyll build
+      working-directory: src
       env:
         JEKYLL_ENV: production
 
@@ -94,7 +96,7 @@ jobs:
         azure_static_web_apps_api_token: ${{ env.static_web_app_api_key }}
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         action: "upload"
-        app_location: "_site" 
+        app_location: "src/_site" 
         skip_app_build: true
 
   terraform-plan-and-apply-prd:
@@ -166,9 +168,11 @@ jobs:
       with:
         ruby-version: '3.3'
         bundler-cache: true
+        working-directory: src
 
     - name: Jekyll build
       run: bundle exec jekyll build
+      working-directory: src
       env:
         JEKYLL_ENV: production
 
@@ -178,5 +182,5 @@ jobs:
         azure_static_web_apps_api_token: ${{ env.static_web_app_api_key }}
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         action: "upload"
-        app_location: "_site" 
+        app_location: "src/_site" 
         skip_app_build: true
