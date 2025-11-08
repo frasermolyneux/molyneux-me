@@ -7,7 +7,7 @@ dns = {
   subscription_id     = "db34f572-8b71-40d6-8f99-f29a27612144"
   resource_group_name = "rg-platform-dns-prd-uksouth-01"
   domain              = "molyneux.me"
-  subdomain           = "dev"
+  subdomain           = "www.dev"
 }
 
 tags = {
