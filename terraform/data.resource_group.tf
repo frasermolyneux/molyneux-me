@@ -1,3 +1,3 @@
 data "azurerm_resource_group" "rg" {
-  name = local.resource_group_name
+  name = local.workload_resource_group.name
 }

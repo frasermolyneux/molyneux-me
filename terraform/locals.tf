@@ -1,4 +1,7 @@
 locals {
+  static_web_app_name   = "stapp-${var.workload_name}-${var.environment}-${var.location}"
+  app_data_storage_name = "sa${random_id.environment_id.hex}"
+
   workload_resource_groups = {
     for location in [var.location] :
     location => data.terraform_remote_state.platform_workloads.outputs.workload_resource_groups[var.workload_name][var.environment].resource_groups[lower(location)]
@@ -15,10 +18,6 @@ locals {
   )
 
   workload_resource_group = local.workload_resource_groups[var.location]
-
-  resource_group_name   = local.workload_resource_group.name
-  static_web_app_name   = "stapp-${var.workload_name}-${var.environment}-${var.location}"
-  app_data_storage_name = "sa${random_id.environment_id.hex}"
 
   monitor_action_groups = data.terraform_remote_state.platform_monitoring.outputs.monitor_action_groups
 
