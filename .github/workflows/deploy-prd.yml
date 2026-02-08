@@ -1,0 +1,201 @@
+name: Deploy Prod
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 4"
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+  build-and-test:
+    permissions:
+      contents: read
+    if: github.event_name != 'push' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+          working-directory: src
+
+      - name: Install dependencies
+        run: |
+          bundle config set path 'vendor/bundle'
+          bundle install --jobs 4 --retry 3
+        working-directory: src
+
+      - name: Build static site
+        run: bundle exec jekyll build --destination _site --trace
+        working-directory: src
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-site
+          path: src/_site
+
+  terraform-plan-and-apply-dev:
+    permissions:
+      contents: read
+      id-token: write
+    if: github.event_name == 'push'
+    environment: Development
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.repository }}-dev
+    steps:
+      - uses: frasermolyneux/actions/terraform-plan-and-apply@main
+        with:
+          terraform-folder: "terraform"
+          terraform-var-file: "tfvars/dev.tfvars"
+          terraform-backend-file: "backends/dev.backend.hcl"
+          AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - id: terraform-output
+        shell: bash
+        run: |
+          cd terraform
+          echo "static_web_app_name=$(terraform output -raw static_web_app_name)" >> $GITHUB_OUTPUT
+        env:
+          ARM_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+          ARM_USE_AZUREAD: true
+          ARM_USE_OIDC: true
+
+    outputs:
+      static_web_app_name: ${{ steps.terraform-output.outputs.static_web_app_name }}
+
+  static-web-app-deploy-dev:
+    permissions:
+      contents: read
+      id-token: write
+    if: github.event_name == 'push'
+    environment: Development
+    needs: [build-and-test, terraform-plan-and-apply-dev]
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.repository }}-dev
+    steps:
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: static-site
+          path: static-site
+
+      - name: Az CLI Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+
+      - id: static-web-app-api-key
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            static_web_app_api_key=$(az staticwebapp secrets list -n ${{ needs.terraform-plan-and-apply-dev.outputs.static_web_app_name }} -o tsv --query properties.apiKey)
+            echo "::add-mask::$static_web_app_api_key"
+            echo static_web_app_api_key=$static_web_app_api_key >> $GITHUB_ENV
+
+      - id: deploy-static-web-app
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ env.static_web_app_api_key }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: static-site
+          skip_app_build: true
+
+  terraform-plan-and-apply-prd:
+    permissions:
+      contents: read
+      id-token: write
+    environment: Production
+    needs:
+      - build-and-test
+      - terraform-plan-and-apply-dev
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.repository }}-prd
+    if: |
+      always() &&
+      needs.build-and-test.result == 'success' &&
+      (needs.terraform-plan-and-apply-dev.result == 'success' || needs.terraform-plan-and-apply-dev.result == 'skipped')
+    steps:
+      - uses: frasermolyneux/actions/terraform-plan-and-apply@main
+        with:
+          terraform-folder: "terraform"
+          terraform-var-file: "tfvars/prd.tfvars"
+          terraform-backend-file: "backends/prd.backend.hcl"
+          AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - id: terraform-output
+        shell: bash
+        run: |
+          cd terraform
+          echo "static_web_app_name=$(terraform output -raw static_web_app_name)" >> $GITHUB_OUTPUT
+        env:
+          ARM_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+          ARM_USE_AZUREAD: true
+          ARM_USE_OIDC: true
+
+    outputs:
+      static_web_app_name: ${{ steps.terraform-output.outputs.static_web_app_name }}
+
+  static-web-app-deploy-prd:
+    permissions:
+      contents: read
+      id-token: write
+    environment: Production
+    needs:
+      - build-and-test
+      - terraform-plan-and-apply-prd
+      - static-web-app-deploy-dev
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.repository }}-prd
+    steps:
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: static-site
+          path: static-site
+
+      - name: Az CLI Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+
+      - id: static-web-app-api-key
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            static_web_app_api_key=$(az staticwebapp secrets list -n ${{ needs.terraform-plan-and-apply-prd.outputs.static_web_app_name }} -o tsv --query properties.apiKey)
+            echo "::add-mask::$static_web_app_api_key"
+            echo static_web_app_api_key=$static_web_app_api_key >> $GITHUB_ENV
+
+      - id: deploy-static-web-app
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ env.static_web_app_api_key }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: static-site
+          skip_app_build: true
