@@ -1,14 +1,17 @@
-name: Deploy Prod
+name: Deploy Prd
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 3 * * 4"
   push:
     branches:
       - main
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 4"
 
 permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}
 
 jobs:
   build-and-test:
@@ -169,6 +172,10 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.repository }}-prd
+    if: |
+      always() &&
+      needs.terraform-plan-and-apply-prd.result == 'success' &&
+      (needs.static-web-app-deploy-dev.result == 'success' || needs.static-web-app-deploy-dev.result == 'skipped')
     steps:
       - name: Download site artifact
         uses: actions/download-artifact@v4
