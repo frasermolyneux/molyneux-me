@@ -6,7 +6,7 @@
 - Key variables: set `subscription_id`, `dns` object (subscription, RG, domain, subdomain), and remote state coordinates per environment. Names derive from `workload_name`, `environment`, `location` into `stapp-{workload}-{environment}-{location}` and storage account `sa{random_id}`.
 - GitHub Actions workflows (see [ .github/workflows](.github/workflows)):
   - `build-and-test`: feature/bugfix/hotfix pushes; installs Ruby 3.3 and runs Jekyll build.
-  - `pr-verify`: PRs to main; always build, does dev TF plan, optional dev apply+deploy when labeled `deploy-dev`, optional prd plan when labeled `run-prd-plan`; skips TF for drafts/dependabot.
+  - `pr-verify`: all PRs; always build, does dev TF plan, optional dev apply+deploy when labeled `deploy-dev`, optional prd plan when labeled `run-prd-plan`; skips TF for drafts/dependabot.
   - `deploy-dev`: manual dev plan/apply + deploy; `deploy-prd`: main pushes + weekly schedule -> dev apply/deploy then prd apply/deploy.
   - `codequality`: weekly + PR/main for SonarCloud + CodeQL; `destroy-*` workflows are manual cleanups; `dependabot-automerge` manages bot updates.
 - Azure auth: workflows rely on GitHub environment OIDC vars (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`). Static Web App deploy pulls API key via `az staticwebapp secrets list` in workflows.
