@@ -2,12 +2,13 @@
 
 [![Build and Test](https://github.com/frasermolyneux/molyneux-me/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/frasermolyneux/molyneux-me/actions/workflows/build-and-test.yml)
 [![Code Quality](https://github.com/frasermolyneux/molyneux-me/actions/workflows/codequality.yml/badge.svg)](https://github.com/frasermolyneux/molyneux-me/actions/workflows/codequality.yml)
+[![Copilot Setup Steps](https://github.com/frasermolyneux/molyneux-me/actions/workflows/copilot-setup-steps.yml/badge.svg)](https://github.com/frasermolyneux/molyneux-me/actions/workflows/copilot-setup-steps.yml)
 [![Dependabot Automerge](https://github.com/frasermolyneux/molyneux-me/actions/workflows/dependabot-automerge.yml/badge.svg)](https://github.com/frasermolyneux/molyneux-me/actions/workflows/dependabot-automerge.yml)
+[![Deploy Dev](https://github.com/frasermolyneux/molyneux-me/actions/workflows/deploy-dev.yml/badge.svg)](https://github.com/frasermolyneux/molyneux-me/actions/workflows/deploy-dev.yml)
+[![Deploy Prd](https://github.com/frasermolyneux/molyneux-me/actions/workflows/deploy-prd.yml/badge.svg)](https://github.com/frasermolyneux/molyneux-me/actions/workflows/deploy-prd.yml)
 [![Destroy Development](https://github.com/frasermolyneux/molyneux-me/actions/workflows/destroy-development.yml/badge.svg)](https://github.com/frasermolyneux/molyneux-me/actions/workflows/destroy-development.yml)
 [![Destroy Environment](https://github.com/frasermolyneux/molyneux-me/actions/workflows/destroy-environment.yml/badge.svg)](https://github.com/frasermolyneux/molyneux-me/actions/workflows/destroy-environment.yml)
 [![PR Verify](https://github.com/frasermolyneux/molyneux-me/actions/workflows/pr-verify.yml/badge.svg)](https://github.com/frasermolyneux/molyneux-me/actions/workflows/pr-verify.yml)
-[![Deploy Dev](https://github.com/frasermolyneux/molyneux-me/actions/workflows/deploy-dev.yml/badge.svg)](https://github.com/frasermolyneux/molyneux-me/actions/workflows/deploy-dev.yml)
-[![Deploy Prd](https://github.com/frasermolyneux/molyneux-me/actions/workflows/deploy-prd.yml/badge.svg)](https://github.com/frasermolyneux/molyneux-me/actions/workflows/deploy-prd.yml)
 
 ## Documentation
 
