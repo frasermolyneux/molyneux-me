@@ -46,6 +46,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      pull-requests: write
     if: github.event.pull_request.draft == false && !contains(github.event.pull_request.labels.*.name, 'deploy-dev')
     needs: build-and-test
     environment: Development
@@ -70,6 +71,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      pull-requests: write
     if: github.event.pull_request.draft == false && github.event.pull_request.user.login != 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'deploy-dev')
     needs: build-and-test
     environment: Development
@@ -105,6 +107,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      pull-requests: write
     if: github.event.pull_request.draft == false && github.event.pull_request.user.login != 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'deploy-dev')
     environment: Development
     needs: [build-and-test, terraform-plan-and-apply-dev]
@@ -146,6 +149,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      pull-requests: write
     if: github.event.pull_request.draft == false && contains(github.event.pull_request.labels.*.name, 'run-prd-plan')
     needs: build-and-test
     environment: Production
