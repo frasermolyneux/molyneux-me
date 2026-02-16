@@ -93,7 +93,7 @@ jobs:
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
 
       - id: static-web-app-api-key
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         with:
           inlineScript: |
             static_web_app_api_key=$(az staticwebapp secrets list -n ${{ needs.terraform-plan-and-apply-dev.outputs.static_web_app_name }} -o tsv --query properties.apiKey)
