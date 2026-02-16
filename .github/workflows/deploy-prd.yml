@@ -39,7 +39,7 @@ jobs:
         working-directory: src
 
       - name: Upload site artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: static-site
           path: src/_site
@@ -89,7 +89,7 @@ jobs:
       group: ${{ github.repository }}-dev
     steps:
       - name: Download site artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: static-site
           path: static-site
@@ -102,7 +102,7 @@ jobs:
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
 
       - id: static-web-app-api-key
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         with:
           inlineScript: |
             static_web_app_api_key=$(az staticwebapp secrets list -n ${{ needs.terraform-plan-and-apply-dev.outputs.static_web_app_name }} -o tsv --query properties.apiKey)
@@ -176,7 +176,7 @@ jobs:
       needs.static-web-app-deploy-dev.result == 'success'
     steps:
       - name: Download site artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: static-site
           path: static-site
@@ -189,7 +189,7 @@ jobs:
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
 
       - id: static-web-app-api-key
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         with:
           inlineScript: |
             static_web_app_api_key=$(az staticwebapp secrets list -n ${{ needs.terraform-plan-and-apply-prd.outputs.static_web_app_name }} -o tsv --query properties.apiKey)
