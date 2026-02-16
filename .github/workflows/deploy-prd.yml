@@ -48,7 +48,6 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    if: github.event_name == 'push'
     environment: Development
     needs: build-and-test
     runs-on: ubuntu-latest
@@ -83,7 +82,6 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    if: github.event_name == 'push'
     environment: Development
     needs: [build-and-test, terraform-plan-and-apply-dev]
     runs-on: ubuntu-latest
@@ -134,7 +132,7 @@ jobs:
     if: |
       always() &&
       needs.build-and-test.result == 'success' &&
-      (needs.terraform-plan-and-apply-dev.result == 'success' || needs.terraform-plan-and-apply-dev.result == 'skipped')
+      needs.terraform-plan-and-apply-dev.result == 'success'
     steps:
       - uses: frasermolyneux/actions/terraform-plan-and-apply@main
         with:
@@ -175,7 +173,7 @@ jobs:
     if: |
       always() &&
       needs.terraform-plan-and-apply-prd.result == 'success' &&
-      (needs.static-web-app-deploy-dev.result == 'success' || needs.static-web-app-deploy-dev.result == 'skipped')
+      needs.static-web-app-deploy-dev.result == 'success'
     steps:
       - name: Download site artifact
         uses: actions/download-artifact@v4
