@@ -6,7 +6,7 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    - cron: "0 3 * * 4"
+    - cron: "0 1 * * 5"
 
 permissions: {}
 
@@ -30,6 +30,7 @@ jobs:
             terraform:terraform/**
 
   terraform-state-check-dev:
+    if: github.event_name != 'schedule'
     permissions:
       contents: read
       id-token: write
@@ -54,7 +55,9 @@ jobs:
     needs:
       - detect-changes
       - terraform-state-check-dev
-    if: needs.detect-changes.outputs.src == 'true' || needs.terraform-state-check-dev.outputs.has_resources != 'true'
+    if: |
+      !failure() && !cancelled() &&
+      (needs.detect-changes.outputs.src == 'true' || needs.terraform-state-check-dev.outputs.has_resources != 'true')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -82,6 +85,7 @@ jobs:
           path: src/_site
 
   terraform-plan-and-apply-dev:
+    if: github.event_name != 'schedule'
     permissions:
       contents: read
       id-token: write
@@ -142,6 +146,7 @@ jobs:
     concurrency:
       group: ${{ github.repository }}-dev
     if: |
+      github.event_name != 'schedule' &&
       !failure() && !cancelled() &&
       (needs.detect-changes.outputs.src == 'true' || needs.terraform-state-check-dev.outputs.has_resources != 'true')
     steps:
@@ -190,7 +195,7 @@ jobs:
       group: ${{ github.repository }}-prd
     if: |
       !failure() && !cancelled() &&
-      needs.terraform-plan-and-apply-dev.result == 'success'
+      (needs.terraform-plan-and-apply-dev.result == 'success' || github.event_name == 'schedule')
     steps:
       - uses: frasermolyneux/actions/terraform-plan-and-apply@terraform-plan-and-apply/v1.4
         if: needs.detect-changes.outputs.terraform == 'true'
