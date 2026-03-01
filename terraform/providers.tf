@@ -18,7 +18,6 @@ terraform {
 
 provider "azurerm" {
   subscription_id                 = var.subscription_id
-  resource_provider_registrations = "none"
 
   features {
     resource_group {
@@ -33,7 +32,6 @@ provider "azurerm" {
 provider "azurerm" {
   alias                           = "dns"
   subscription_id                 = var.dns.subscription_id
-  resource_provider_registrations = "none"
 
   features {}
 
