@@ -38,9 +38,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       has_resources: ${{ steps.state-check.outputs.has_resources }}
+      state_tainted: ${{ steps.state-check.outputs.state_tainted }}
     steps:
       - id: state-check
-        uses: frasermolyneux/actions/terraform-state-check@terraform-state-check/v1.0
+        uses: frasermolyneux/actions/terraform-state-check@terraform-state-check/v1.1
         with:
           terraform-folder: "terraform"
           terraform-var-file: "tfvars/dev.tfvars"
@@ -57,7 +58,7 @@ jobs:
       - terraform-state-check-dev
     if: |
       !failure() && !cancelled() &&
-      (needs.detect-changes.outputs.src == 'true' || needs.terraform-state-check-dev.outputs.has_resources != 'true')
+      (needs.detect-changes.outputs.src == 'true' || needs.terraform-state-check-dev.outputs.state_tainted == 'true')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -98,7 +99,7 @@ jobs:
       group: ${{ github.repository }}-dev
     steps:
       - uses: frasermolyneux/actions/terraform-plan-and-apply@terraform-plan-and-apply/v1.4
-        if: needs.detect-changes.outputs.terraform == 'true' || needs.terraform-state-check-dev.outputs.has_resources != 'true'
+        if: needs.detect-changes.outputs.terraform == 'true' || needs.terraform-state-check-dev.outputs.state_tainted == 'true'
         with:
           terraform-folder: "terraform"
           terraform-var-file: "tfvars/dev.tfvars"
@@ -108,7 +109,7 @@ jobs:
           AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
 
       - uses: frasermolyneux/actions/terraform-output@terraform-output/v1.0
-        if: needs.detect-changes.outputs.terraform != 'true' && needs.terraform-state-check-dev.outputs.has_resources == 'true'
+        if: needs.detect-changes.outputs.terraform != 'true' && needs.terraform-state-check-dev.outputs.state_tainted != 'true'
         with:
           terraform-folder: "terraform"
           terraform-var-file: "tfvars/dev.tfvars"
@@ -148,7 +149,7 @@ jobs:
     if: |
       github.event_name != 'schedule' &&
       !failure() && !cancelled() &&
-      (needs.detect-changes.outputs.src == 'true' || needs.terraform-state-check-dev.outputs.has_resources != 'true')
+      (needs.detect-changes.outputs.src == 'true' || needs.terraform-state-check-dev.outputs.state_tainted == 'true')
     steps:
       - name: Download site artifact
         uses: actions/download-artifact@v7
