@@ -5,6 +5,8 @@ resource "azurerm_static_web_app" "app" {
 
   sku_tier = "Free"
   sku_size = "Free"
+
+  tags = var.tags
 }
 
 resource "azurerm_dns_cname_record" "app" {
