@@ -1,5 +1,7 @@
 # Copilot Instructions
 
+> Shared conventions: see [`.github-copilot/.github/instructions/terraform.instructions.md`](../../.github-copilot/.github/instructions/terraform.instructions.md) for the standard Terraform layout, providers, remote-state pattern, validation commands, and CI/CD workflows.
+
 - Stack: Jekyll 4.3 with minima theme; all source lives under [src](src) (posts in [src/_posts](src/_posts), config in [src/_config.yml](src/_config.yml), Static Web Apps routing in [src/staticwebapp.config.json](src/staticwebapp.config.json)). Never edit the generated [src/_site](src/_site) output.
 - Local dev: `cd src && bundle install && bundle exec jekyll serve` builds to `_site` and serves on port 4000; `bundle exec jekyll build` runs a production build for CI parity.
 - Terraform: infra under [terraform](terraform) provisions the Static Web App and CNAME binding using Free SKU; custom domain validated via CNAME delegation. Backends in [terraform/backends](terraform/backends) and vars in [terraform/tfvars](terraform/tfvars) pair with OIDC-enabled remote states for platform workload/monitoring (`platform_workloads_state`, `platform_monitoring_state`). No resource group is created here—RGs come from platform remote state.
