@@ -18,7 +18,7 @@ jobs:
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -37,7 +37,7 @@ jobs:
         working-directory: src
 
       - name: Upload site artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: static-site
           path: src/_site
@@ -116,20 +116,20 @@ jobs:
       group: ${{ github.repository }}-dev
     steps:
       - name: Download site artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: static-site
           path: static-site
 
       - name: Az CLI Login
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
           client-id: ${{ vars.AZURE_CLIENT_ID }}
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
 
       - id: static-web-app-api-key
-        uses: azure/CLI@v2
+        uses: azure/CLI@v3
         with:
           inlineScript: |
             static_web_app_api_key=$(az staticwebapp secrets list -n ${{ needs.terraform-plan-and-apply-dev.outputs.static_web_app_name }} -o tsv --query properties.apiKey)
