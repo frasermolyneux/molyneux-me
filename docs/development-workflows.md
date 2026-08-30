@@ -76,6 +76,7 @@ graph TD
 
 - Drafts and dependabot PRs skip Terraform by default
 - Add `deploy-dev` to run dev plan/apply + deploy; add `run-prd-plan` to run the prd plan
+- The `deploy-dev` apply + deploy jobs are skipped for Dependabot PRs; those PRs only ever run the dev Terraform plan. Validate a dev deployment from a human/agent feature-branch PR (or the manual `deploy-dev.yml` dispatch) instead.
 
 ## Pipeline Building Blocks
 
