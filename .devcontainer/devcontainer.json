@@ -2,7 +2,7 @@
     "name": "molyneux-me development",
     "image": "mcr.microsoft.com/devcontainers/ruby:3.3",
     "features": {
-        "ghcr.io/devcontainers/features/node:1": {
+        "ghcr.io/devcontainers/features/node:2": {
             "version": "20"
         },
         "ghcr.io/devcontainers/features/terraform:1": {
