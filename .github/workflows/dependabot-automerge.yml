@@ -28,11 +28,12 @@ jobs:
     needs:
       - dependabot-policy
     permissions:
+      actions: write
       checks: read
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     if: ${{ needs.dependabot-policy.outputs.is_dependabot == 'true' && needs.dependabot-policy.outputs.auto_merge_allowed == 'true' }}
     steps:
       - name: Detect Terraform changes
@@ -107,3 +108,35 @@ jobs:
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Wait for pull request merge
+        shell: bash
+        run: |
+          for attempt in {1..60}; do
+            state=$(gh pr view "$PR_URL" --json state --jq '.state')
+
+            case "$state" in
+              MERGED)
+                exit 0
+                ;;
+              CLOSED)
+                echo "::error::Pull request closed without merging"
+                exit 1
+                ;;
+            esac
+
+            sleep 10
+          done
+
+          echo "::error::Timed out waiting for pull request merge"
+          exit 1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+
+      - name: Dispatch post-merge workflows
+        run: |
+          gh workflow run codequality.yml --ref main
+          gh workflow run deploy-prd.yml --ref main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
