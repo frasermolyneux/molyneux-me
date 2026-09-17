@@ -77,6 +77,7 @@ graph TD
 - Drafts skip Terraform validation; other PRs run the dev Terraform plan by default
 - Add `deploy-dev` to run dev plan/apply + deploy; add `run-prd-plan` to run the prd plan
 - Terraform Dependabot PRs receive `run-prd-plan` automatically, and auto-merge waits for successful dev and prd plans
+- Dependabot auto-merge explicitly dispatches the production deployment and code-quality workflows after merging
 - The `deploy-dev` apply + deploy jobs are skipped for Dependabot PRs. Validate a dev deployment from a human/agent feature-branch PR (or the manual `deploy-dev.yml` dispatch) instead.
 
 ## Pipeline Building Blocks
