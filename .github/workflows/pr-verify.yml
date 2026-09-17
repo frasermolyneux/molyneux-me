@@ -51,7 +51,7 @@ jobs:
       contents: read
       id-token: write
       pull-requests: write
-    if: github.event.pull_request.draft == false && !contains(github.event.pull_request.labels.*.name, 'deploy-dev') && contains(fromJson('["opened","synchronize","reopened","ready_for_review"]'), github.event.action)
+    if: github.event.pull_request.draft == false && !contains(github.event.pull_request.labels.*.name, 'deploy-dev') && (contains(fromJson('["opened","synchronize","reopened","ready_for_review"]'), github.event.action) || (github.event.action == 'labeled' && github.event.label.name == 'run-prd-plan'))
     needs: build-and-test
     environment: Development
     runs-on: ubuntu-latest

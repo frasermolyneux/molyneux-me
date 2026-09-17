@@ -16,6 +16,10 @@ updates:
   - package-ecosystem: "terraform"
     assignees: ["frasermolyneux"]
     directory: "/terraform"
+    labels:
+      - "dependencies"
+      - "terraform"
+      - "run-prd-plan"
     schedule:
       interval: "weekly"
       day: "sunday"

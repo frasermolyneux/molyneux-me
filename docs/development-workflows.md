@@ -13,7 +13,7 @@ Target: Engineers working on molyneux-me (Azure Static Web App built with Jekyll
 ### Pull Requests → main
 - **pr-verify.yml**: Validation pipeline (runs on PR open, updates, reopen, ready for review, label changes)
   - Build and package Jekyll site
-  - Terraform plan for dev by default (skips dependabot and drafts)
+  - Terraform plan for dev by default (skips drafts)
   - Terraform plan+apply and deploy to dev when labeled `deploy-dev`
   - Terraform plan for prd when labeled `run-prd-plan`
   - Concurrency groups prevent parallel dev/prd operations
@@ -74,9 +74,10 @@ graph TD
 
 ## Copilot & Label Flow
 
-- Drafts and dependabot PRs skip Terraform by default
+- Drafts skip Terraform validation; other PRs run the dev Terraform plan by default
 - Add `deploy-dev` to run dev plan/apply + deploy; add `run-prd-plan` to run the prd plan
-- The `deploy-dev` apply + deploy jobs are skipped for Dependabot PRs; those PRs only ever run the dev Terraform plan. Validate a dev deployment from a human/agent feature-branch PR (or the manual `deploy-dev.yml` dispatch) instead.
+- Terraform Dependabot PRs receive `run-prd-plan` automatically, and auto-merge waits for successful dev and prd plans
+- The `deploy-dev` apply + deploy jobs are skipped for Dependabot PRs. Validate a dev deployment from a human/agent feature-branch PR (or the manual `deploy-dev.yml` dispatch) instead.
 
 ## Pipeline Building Blocks
 

@@ -28,14 +28,82 @@ jobs:
     needs:
       - dependabot-policy
     permissions:
+      checks: read
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     if: ${{ needs.dependabot-policy.outputs.is_dependabot == 'true' && needs.dependabot-policy.outputs.auto_merge_allowed == 'true' }}
     steps:
+      - name: Detect Terraform changes
+        id: changes
+        shell: bash
+        run: |
+          changed_files=$(gh api \
+            --paginate \
+            "/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/files" \
+            --jq '.[].filename')
+
+          if grep -q '^terraform/' <<< "$changed_files"; then
+            echo "terraform=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "terraform=false" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+
+      - name: Wait for Terraform plans
+        if: ${{ steps.changes.outputs.terraform == 'true' }}
+        shell: bash
+        run: |
+          required_checks=("terraform-plan-dev" "terraform-plan-prd")
+
+          for attempt in {1..45}; do
+            checks=$(gh api \
+              -H "Accept: application/vnd.github+json" \
+              "/repos/$GITHUB_REPOSITORY/commits/$HEAD_SHA/check-runs?filter=latest&per_page=100")
+            waiting=false
+
+            for check in "${required_checks[@]}"; do
+              state=$(jq -r --arg check "$check" '
+                [.check_runs[] | select(.name == $check)]
+                | sort_by(.started_at)
+                | last
+                | if . == null then "missing"
+                  elif .status != "completed" then .status
+                  else .conclusion
+                  end
+              ' <<< "$checks")
+
+              case "$state" in
+                success)
+                  ;;
+                missing|queued|in_progress|pending|requested|waiting)
+                  waiting=true
+                  ;;
+                *)
+                  echo "::error::$check completed with state: $state"
+                  exit 1
+                  ;;
+              esac
+            done
+
+            if [[ "$waiting" == "false" ]]; then
+              exit 0
+            fi
+
+            sleep 20
+          done
+
+          echo "::error::Timed out waiting for Terraform plans"
+          exit 1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+
       - name: Enable auto-merge for Dependabot PRs
         run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
