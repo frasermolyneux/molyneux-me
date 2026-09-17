@@ -79,7 +79,7 @@ jobs:
               case "$state" in
                 success)
                   ;;
-                missing|queued|in_progress|pending|requested|waiting)
+                missing|queued|in_progress|pending|requested|waiting|cancelled|skipped|neutral|stale)
                   waiting=true
                   ;;
                 *)
