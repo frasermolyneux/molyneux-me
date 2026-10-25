@@ -9,7 +9,7 @@ Molyneux.me is a Jekyll 4.3 static site deployed to Azure Static Web Apps, with 
 - Terraform under [`../terraform`](../terraform) owns the Static Web App, storage, and CNAME binding. It consumes workload and monitoring remote state; it does not create the shared resource groups.
 - Environment backend and variable files are paired under `terraform/backends` and `terraform/tfvars`.
 - Authentication in workflows is OIDC-based. Do not introduce deployment credentials or hard-coded subscription identifiers.
-- `.terraform.lock.hcl` is ignored; committed provider constraints define Terraform compatibility.
+- Commit each root's `.terraform-version` and `.terraform.lock.hcl`. Select the exact root CLI pin before invoking Terraform; normal initialization uses `-lockfile=readonly`. Regenerate provider selections only in a reviewed dependency-update PR; never commit state, plans, or `.terraform/`.
 
 ## Validation
 
