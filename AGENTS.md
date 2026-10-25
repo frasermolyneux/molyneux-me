@@ -23,7 +23,7 @@ bundle exec jekyll build   # production build, matches CI
 
 # Terraform (from repo root)
 terraform -chdir=terraform fmt -check -recursive
-terraform -chdir=terraform init -backend-config=backends/dev.backend.hcl
+terraform -chdir=terraform init -lockfile=readonly -backend-config=backends/dev.backend.hcl
 terraform -chdir=terraform validate
 terraform -chdir=terraform plan -var-file=tfvars/dev.tfvars
 ```
@@ -32,7 +32,7 @@ terraform -chdir=terraform plan -var-file=tfvars/dev.tfvars
 
 - `terraform/backends/{dev,prd}.backend.hcl` select the remote state backend; `terraform/tfvars/{dev,prd}.tfvars` supply environment variables.
 - Remote state is read-only input: `platform_workloads_state` (resource group + admin unit lookup), `platform_monitoring_state` (action group ids). This repo does not own or modify those states.
-- `.terraform.lock.hcl` is gitignored repo-wide and not tracked — provider versions are pinned directly in `terraform/providers.tf` (azurerm ~> 5.0.0, time ~> 0.9, terraform >= 1.15.6).
+- Commit each root's `.terraform-version` and `.terraform.lock.hcl`. Select the exact root CLI pin before invoking Terraform; normal initialization uses `-lockfile=readonly`. Regenerate provider selections only in a reviewed dependency-update PR; never commit state, plans, or `.terraform/`.
 - Ecosystem lockfiles that ARE tracked and must stay: `src/Gemfile.lock` (Ruby bundler).
 
 ## Do NOT
