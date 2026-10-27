@@ -41,3 +41,6 @@ terraform -chdir=terraform plan -var-file=tfvars/dev.tfvars
 - Edit the generated `src/_site` output directly — it is build output, not source.
 - Modify `.github/workflows/` or `.github/dependabot.yml` unless that is the explicit task.
 - Change the Azure resource naming convention (`stapp-{workload}-{environment}-{location}`, `sa{random_id}`) or tags.
+
+
+CI-only main pushes run change detection but skip cloud/backend deployment jobs. Automatic deployment requires a change to the workload inputs already declared by the deployment filters; scheduled maintenance and explicit workflow dispatch retain their existing behavior. A deployment-workflow-only change requires explicit dispatch to exercise cloud operations.
