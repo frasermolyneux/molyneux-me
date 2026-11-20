@@ -40,6 +40,8 @@ jobs:
       contents: read
       id-token: write
     environment: Development
+    env:
+      TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_KEY }}
     needs: build-and-test
     runs-on: ubuntu-latest
     concurrency:

@@ -61,6 +61,7 @@ jobs:
       AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_KEY }}
     steps:
       - uses: frasermolyneux/actions/terraform-plan@977ddbedf7f5c6e2fae98ff1d6ec6a9c7669d778 # terraform-plan/v6.0.0
         with:
@@ -79,6 +80,8 @@ jobs:
     if: github.event.pull_request.draft == false && github.event.pull_request.user.login != 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'deploy-dev') && (contains(fromJson('["opened","synchronize","reopened","ready_for_review"]'), github.event.action) || (github.event.action == 'labeled' && github.event.label.name == 'deploy-dev'))
     needs: build-and-test
     environment: Development
+    env:
+      TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_KEY }}
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.repository }}-dev
@@ -164,6 +167,7 @@ jobs:
       AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_KEY }}
     steps:
       - uses: frasermolyneux/actions/terraform-plan@977ddbedf7f5c6e2fae98ff1d6ec6a9c7669d778 # terraform-plan/v6.0.0
         with:

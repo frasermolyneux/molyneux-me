@@ -105,3 +105,7 @@ OIDC authentication uses GitHub environment variables (not secrets):
 - `AZURE_SUBSCRIPTION_ID`: Target subscription
 
 Defined in **Development** and **Production** environments within GitHub repository settings.
+
+Terraform manages the Static Web App CNAME in Cloudflare using the
+`CLOUDFLARE_API_KEY` GitHub environment secret, scoped to the `molyneux.me`
+zone. The record is DNS-only so Azure can validate the custom domain.

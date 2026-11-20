@@ -12,6 +12,11 @@ variable "location" {
 
 variable "subscription_id" {}
 
+variable "cloudflare_api_token" {
+  type      = string
+  sensitive = true
+}
+
 variable "dns" {
   type = object({
     subscription_id     = string
