@@ -20,6 +20,8 @@ jobs:
       contents: read
       id-token: write
     environment: ${{ inputs.environment == 'prd' && 'Production' || 'Development' }}
+    env:
+      TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_KEY }}
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.repository }}-${{ inputs.environment }}

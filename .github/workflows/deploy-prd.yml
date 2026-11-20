@@ -94,6 +94,8 @@ jobs:
       contents: read
       id-token: write
     environment: Development
+    env:
+      TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_KEY }}
     needs:
       - detect-changes
       - terraform-state-check-dev
@@ -189,6 +191,8 @@ jobs:
       contents: read
       id-token: write
     environment: Production
+    env:
+      TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_KEY }}
     needs:
       - detect-changes
       - build-and-test

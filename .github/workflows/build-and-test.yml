@@ -64,6 +64,8 @@ jobs:
       id-token: write
     runs-on: ubuntu-latest
     environment: Development
+    env:
+      TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_KEY }}
     concurrency:
       group: ${{ github.repository }}-dev
     steps:

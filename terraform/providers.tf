@@ -7,6 +7,11 @@ terraform {
       version = "~> 5.13.0"
     }
 
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 5.29.0"
+    }
+
     time = {
       source  = "hashicorp/time"
       version = "~> 0.9"
@@ -27,6 +32,10 @@ provider "azurerm" {
   }
 
   storage_use_azuread = true
+}
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
 }
 
 provider "azurerm" {
