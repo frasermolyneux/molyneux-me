@@ -7,6 +7,11 @@ resource "azurerm_static_web_app" "app" {
   sku_size = "Free"
 
   tags = var.tags
+
+  lifecycle {
+    # Preserve the existing repository association when updating the app.
+    ignore_changes = [repository_branch, repository_url]
+  }
 }
 
 removed {
